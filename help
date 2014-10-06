@@ -1,0 +1,7 @@
+		
+<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&r=0.1" style="height: 100px;" />
+<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&r=0.1" rel="stylesheet" />
+<script src="/sleep?sleep=1000&type=js&expires=1&last=-1&redir=0&r=0.1" type="text/javascript"></script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<img src="../images/a1.jpg" />
