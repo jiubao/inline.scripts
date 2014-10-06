@@ -5,21 +5,28 @@ var app = require('../app');
 var router = express.Router();
 //var appRoot = require('./lib/app-root-path');
 
+function getRandomInt(min, max) {
+  	return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function sendGif(res, params) {
 	var options = {
 		root: app.get('appRoot') + '/public/images/',
 		dotfiles: 'deny',
 		headers: {
-			'Content-Type': 'image/gif',
+			//'Content-Type': 'image/gif',
 		    'x-timestamp': Date.now(),
 		    'x-sent': true
 		}
 	};
 
+	var pngs = ['r1.png','g1.png','b1.png','y1.png','p1.png','c1.png'];
+
 	setTimeout(function() {
 
 		//res.sendFile('1.gif', options, function (err) {
-		res.sendFile('1.gif', options, function (err) {
+		var i = getRandomInt(0, 5);
+		res.sendFile(pngs[i], options, function (err) {
 			if (err) {
 				console.log(err);
 				res.status(err.status).end();
