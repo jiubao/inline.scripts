@@ -14,4 +14,8 @@ router.get('/3', function(req, res) {
   res.render('inline/3', { title: 'xiad' });
 });
 
+router.get('/4', function(req, res) {
+  res.render('inline/4', { title: 'xiad' });
+});
+
 module.exports = router;

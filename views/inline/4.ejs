@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+		function sleep(ms) {
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			console.log('we are here now!');
+		}
+
+		function asleep(ms1, ms2) {
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+
+	</script>
+</head>
+<body>
+	<input type="button" value="reload" onclick="reload('/inline/4')" />
+	<h1>header 1</h1>
+<script type="text/javascript" src="../javascripts/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../javascripts/1.js"></script>
+	<h2>header h2</h2>
+<script src="/sleep?sleep=3000&type=js&expires=1&last=-1&redir=0&r=0.1" type="text/javascript"></script>
+<script src="/sleep?sleep=1000&type=js&expires=1&last=-1&redir=0&r=0.2" type="text/javascript"></script>
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&r=0.1" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&r=0.2" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&r=0.3" style="height: 100px;" />
+	<h3>header h3</h3>
+<link href="/sleep?sleep=4000&type=css&expires=1&last=-1&redir=0&r=0.1" rel="stylesheet" />
+</body>
+</html>
