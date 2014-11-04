@@ -14,6 +14,7 @@ var app = module.exports = express();
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var inlines = require('./routes/inline');
+var block = require('./routes/block');
 var sleep = require('./routes/sleep');
 
 
@@ -31,9 +32,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/inline', inlines);
 app.use('/sleep', sleep);
+app.use('/inline', inlines);
+app.use('/block', block);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

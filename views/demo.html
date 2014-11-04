@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			log.oDate("window loaded");
+		});
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+
+		function sleep(ms) {
+			log.oDate("start sleep");
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			log.oDate("we are here now!");
+		}
+
+		function asleep(ms1, ms2) {
+			log.oDate("start asleep");
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="reload" onclick="reload('/inline/bottomblock')" />
+
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()%>" style="height: 100px;" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()%>" rel="stylesheet" />
+	<script src="/sleep?sleep=1000&run=1000&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<img src="../images/a1.jpg" />
+
+	<script>
+		sleep(1000);
+		asleep(1000,1000);
+	</script>
+
+</body>
+</html>
