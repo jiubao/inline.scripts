@@ -42,6 +42,25 @@ function sendGif(res, params) {
 }
 
 function sendJs(res, params) {
+	setTimeout(function(){
+		var js = ";console.log('dummy js executed');";
+		if (params.run !== "0") {
+			var js = ";!function (ms) { ms += new Date().getTime(); while(new Date() < ms) {} console.log('dummy script executed : " + params.run + " ms'); }(" + params.run + ");";
+		}
+		res.set('content-type', 'application/javascript');
+		res.send(js);
+	}, params.sleep);
+}
+
+function sendJs1(res, params) {
+	res.set('content-type', 'application/javascript');
+
+	var js = ";!function (ms) { ms += new Date().getTime(); while(new Date() < ms) {} console.log('executed for 1 ms'); }(1000);";
+
+	res.send(js);
+}
+
+function sendJs0(res, params) {
 	var options = {
 		root: app.get('appRoot') + '/public/javascripts/',
 		dotfiles: 'deny',
@@ -52,8 +71,10 @@ function sendJs(res, params) {
 		}
 	};
 
+	var js = params.run === "1" ? '1s.js' : '1.js';
+
 	setTimeout(function() {
-		res.sendFile('1.js', options, function (err) {
+		res.sendFile(js, options, function (err) {
 			if (err) {
 				console.log(err);
 				res.status(err.status).end();

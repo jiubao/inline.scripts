@@ -18,4 +18,8 @@ router.get('/4', function(req, res) {
   res.render('inline/4', { title: 'xiad' });
 });
 
+router.get('/bottomblock', function(req, res) {
+  res.render('inline/bottomblock', { title: 'xiad' });
+});
+
 module.exports = router;

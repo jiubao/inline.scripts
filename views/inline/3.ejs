@@ -2,6 +2,25 @@
 <html>
 <head>
 	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			//console.log(+new Date() - dd + " : DOM fullly loaded and parsed.");
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			//console.log(+new Date() - dd + " : window loaded.");
+			log.oDate("window loaded");
+		});
 
 		function reload(url) {
 			document.body.innerHTML = '';
@@ -24,14 +43,19 @@
 	</script>
 </head>
 <body>
-	<link href="/sleep?sleep=2000&type=css&expires=1&last=-1&redir=0&r=0.2" rel="stylesheet" />
+	<script src="/sleep?sleep=1000&run=1000&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
 	<script type="text/javascript">
+		console.log('inline 1 start');
 		sleep(1000);
+		console.log('inline 1 end');
 	</script>
-	<img src="/sleep?sleep=2000&type=gif&expires=1&last=-1&redir=0&r=0.1" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
 	<script type="text/javascript">
+		console.log('inline 2 start');
 		sleep(1000);
+		console.log('inline 2 end');
 	</script>
-	<link href="/sleep?sleep=2000&type=css&expires=1&last=-1&redir=0&r=0.1" rel="stylesheet" />
+	<link href="/sleep?sleep=4000&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()+1%>" rel="stylesheet" />
 </body>
 </html>
