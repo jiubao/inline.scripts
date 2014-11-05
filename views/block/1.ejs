@@ -43,12 +43,19 @@
 	</script>
 </head>
 <body>
-	<input type="button" value="reload" onclick="reload('/inline/bottomblock')" />
+	<input type="button" value="reload" onclick="reload('/block/1')" />
 	<br />
 
+	<script src="/sleep?sleep=500&run=500&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()%>" style="height: 100px;" />
-	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()%>" rel="stylesheet" />
-	<script src="/sleep?sleep=1000&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+1%>" type="text/javascript"></script>
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+11%>" style="height: 100px;" />
+	<script src="/sleep?sleep=500&run=500&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+2%>" type="text/javascript"></script>
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+12%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+13%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+14%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+15%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+16%>" style="height: 100px;" />
 
 
 	<script>

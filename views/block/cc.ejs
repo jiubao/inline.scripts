@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			log.oDate("window loaded");
+		});
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+
+		function sleep(ms) {
+			log.oDate("start sleep");
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			log.oDate("we are here now!");
+		}
+
+		function asleep(ms1, ms2) {
+			log.oDate("start asleep");
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="reload" onclick="reload('/block/cc')" />
+	<br />
+
+<!--
+
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+11%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+12%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+13%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+14%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+15%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+16%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+17%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+18%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+19%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+10%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+20%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+21%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+22%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+23%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+24%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+25%>" style="height: 100px;" />
+
+-->
+
+<!--
+
+-->
+
+<!--
+
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+111%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+112%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+113%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+114%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+115%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+116%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+117%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+118%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+119%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+120%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+121%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+122%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+123%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+124%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+125%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+126%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+127%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+128%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+129%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+130%>" type="text/javascript"></script>
+
+-->
+
+<!--
+
+-->
+
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1001%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1002%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1003%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1004%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1005%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1006%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1007%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1008%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1009%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1010%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1011%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1012%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1013%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1014%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1015%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1016%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1017%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1018%>" rel="stylesheet" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()+1019%>" rel="stylesheet" />
+
+
+<!--
+	<script src="/sleep?sleep=500&run=500&s=1&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+111%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=2&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+112%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=3&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+113%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=4&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+114%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+115%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=6&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+116%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=7&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+117%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=8&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+118%>" type="text/javascript"></script>
+
+	<script src="/sleep?sleep=500&run=500&s=9&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+119%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=10&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+120%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=11&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+121%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=12&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+122%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=13&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+123%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=14&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+124%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=15&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+125%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=16&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+126%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=17&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+127%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=18&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+128%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=19&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+129%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=500&s=20&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+130%>" type="text/javascript"></script>
+
+-->
+
+</body>
+</html>

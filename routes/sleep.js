@@ -45,7 +45,11 @@ function sendJs(res, params) {
 	setTimeout(function(){
 		var js = ";console.log('dummy js executed');";
 		if (params.run !== "0") {
-			var js = ";!function (ms) { ms += new Date().getTime(); while(new Date() < ms) {} console.log('dummy script executed : " + params.run + " ms'); }(" + params.run + ");";
+			var ss = '';
+			if (params.s) {
+				ss = '#' + params.s + ' ';
+			}
+			var js = ";!function (ms) { ms += new Date().getTime(); while(new Date() < ms) {} console.log('"+ss+"dummy script executed : " + params.run + " ms'); }(" + params.run + ");";
 		}
 		res.set('content-type', 'application/javascript');
 		res.send(js);

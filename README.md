@@ -17,3 +17,17 @@ even faster web sites --> inline scripts
 6. script block script execute
 
 7. image block window.load 
+
+----------------------------------------
+
+3.1 link/css just block window.load, not block document.DOMContentLoaded
+
+3.2 link/css block script execution
+
+8. chrome concurrent 6 threads
+
+9. fifo
+
+10. lodaing priority: css > js > img
+
+11. js
