@@ -40,26 +40,88 @@
 				sleep(ms1);
 			}, ms2);
 		}
+
+		function asleepd(ms1, callback) {
+			log.oDate("start asleep download");
+			setTimeout(function(){
+				callback();
+			}, ms1);
+		}
+
+	</script>
+
+<!--
+-->
+	<script>
+		function loadjs(url) {
+			var scriptElem = document.createElement('script');
+			scriptElem.src = url;
+			document.getElementsByTagName('head')[0].appendChild(scriptElem);
+		}
+
+		var jq = '//code.jquery.com/jquery-1.11.1.js';
+		var requirejs = '//requirejs.org/docs/release/2.1.15/comments/require.js';
+		var ag = '//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js';
+
+		var s0 = '/javascripts/1s.js';
+		var s1 = '/sleep?sleep=400&run=400&s=1&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 1%>';
+		var s2 = '/sleep?sleep=200&run=200&s=2&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 2%>';
+		var s3 = '/sleep?sleep=400&run=400&s=3&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 3%>';
+		var s4 = '/sleep?sleep=200&run=100&s=4&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 4%>';
+		var s5 = '/sleep?sleep=100&run=100&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 5%>';
+		var s6 = '/sleep?sleep=100&run=100&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 6%>';
+		var s7 = '/sleep?sleep=100&run=100&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 7%>';
+		var s8 = '/sleep?sleep=100&run=100&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 8%>';
+		var s9 = '/sleep?sleep=100&run=100&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 9%>';
+		var s10 = '/sleep?sleep=100&run=100&s=5&type=js&expires=1&last=-1&redir=0&t=<%=+new Date() + 10%>';
+
 	</script>
 </head>
 <body>
 	<input type="button" value="reload" onclick="reload('/block/1')" />
 	<br />
 
+<!--
+
 	<script src="/sleep?sleep=500&run=500&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()%>" style="height: 100px;" />
 	<script src="/sleep?sleep=500&run=500&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+1%>" type="text/javascript"></script>
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+11%>" style="height: 100px;" />
-	<script src="/sleep?sleep=500&run=500&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+2%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=500&run=0&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()+2%>" type="text/javascript"></script>
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+12%>" style="height: 100px;" />
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+13%>" style="height: 100px;" />
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+14%>" style="height: 100px;" />
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+15%>" style="height: 100px;" />
-	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+16%>" style="height: 100px;" />
+	<img src="/sleep?sleep=1&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+16%>" style="height: 100px;" />
 
+-->
+
+	<img src="/sleep?sleep=400&type=gif&expires=1&last=-1&redir=0&<%=+new Date()+12%>" style="height: 100px;" />
 
 	<script>
+
+		//loadjs(jq);
+		//loadjs(ag);
+		//loadjs(requirejs);
+		//loadjs(s0);
+
+		setTimeout(function() {
+		loadjs(jq);
+		loadjs(ag);
+		loadjs(requirejs);
+			loadjs(s1);
+			loadjs(s2);
+			loadjs(s3);
+			loadjs(s4);
+			loadjs(s5);
+			loadjs(s6);
+			loadjs(s7);
+			loadjs(s8);
+			loadjs(s9);
+			loadjs(s10);
+		}, 600);
 	</script>
+	<link href="/sleep?sleep=500&type=css&expires=1&last=-1&redir=0&<%=+new Date()%>" rel="stylesheet" />
 
 </body>
 </html>
