@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<script type="text/javascript">
 		var log = (function log() {
 			var dd = +new Date();
@@ -43,23 +44,34 @@
 		}
 	</script>
 </head>
+
 <body>
 
-	<!--
-	<script src="/sleep?sleep=1000&run=1000&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
-	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&<%=+new Date()%>" rel="stylesheet" />
-	-->
+
+	<script src="/sleep?sleep=100&run=30&type=js&expires=1&last=-1&redir=0&t=31" type="text/javascript"></script>
+	<script src="/sleep?sleep=40&run=30&type=js&expires=1&last=-1&redir=0&t=32" type="text/javascript"></script>
+	<script src="/sleep?sleep=30&run=30&type=js&expires=1&last=-1&redir=0&t=33" type="text/javascript"></script>
+
+	<img src="/sleep?sleep=80&type=gif&expires=1&last=-1&redir=0&t=11" style="height: 100px;" />
+	<img src="/sleep?sleep=80&type=gif&expires=1&last=-1&redir=0&t=12" style="height: 100px;" />
+	<img src="/sleep?sleep=80&type=gif&expires=1&last=-1&redir=0&t=13" style="height: 100px;" />
+	<img src="/sleep?sleep=80&type=gif&expires=1&last=-1&redir=0&t=14" style="height: 100px;" />
+	<img src="/sleep?sleep=80&type=gif&expires=1&last=-1&redir=0&t=15" style="height: 100px;" />
+	<img src="/sleep?sleep=80&type=gif&expires=1&last=-1&redir=0&t=16" style="height: 100px;" />
+
+<!--
+	<link href="/sleep?sleep=40&type=css&expires=1&last=-1&redir=0&t=21" rel="stylesheet" />
+	<link href="/sleep?sleep=40&type=css&expires=1&last=-1&redir=0&t=22" rel="stylesheet" />
+	<link href="/sleep?sleep=40&type=css&expires=1&last=-1&redir=0&t=23" rel="stylesheet" />
+-->
 
 	<input type="button" value="reload" onclick="reload('/block/0')" />
 	<br />
 
-	<img src="/sleep?sleep=400&type=gif&expires=1&last=-1&redir=0&<%=+new Date()%>" style="height: 100px;" />
+	<%for(var i = 0; i<100000; i++){%>
+	<p>sksksksksksksk</p>
+	<%}%>
 
-
-	<script>
-		//sleep(1000);
-		asleep(1000,1000);
-	</script>
 
 </body>
 </html>

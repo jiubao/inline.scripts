@@ -31,3 +31,12 @@ even faster web sites --> inline scripts
 10. lodaing priority: css > js > img
 
 11. js
+
+12. html is being parsed during downloading
+	Daniel:
+	the browser begins to download the HTML, and as it downloads, it parses it.
+	if it finds an inline script/css/resource that it needs to download, it begins to do so inmediatelly.
+	but it doesn't stop downloading in parallel.
+	the parsing happens as it's being downloaded.
+	it doesn't wait until it's fully downloaded.
+	
