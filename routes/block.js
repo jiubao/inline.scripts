@@ -14,4 +14,8 @@ router.get('/cc', function(req, res) {
   res.render('block/cc', { title: 'xiad' });
 });
 
+router.get('/img', function(req, res) {
+  res.render('block/img', { title: 'xiad' });
+});
+
 module.exports = router;

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			log.oDate("window loaded");
+		});
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+
+		function sleep(ms) {
+			log.oDate("start sleep");
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			log.oDate("we are here now!");
+		}
+
+		function asleep(ms1, ms2) {
+			log.oDate("start asleep");
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+
+		var loadimg = (function(){
+			var imgs = [];
+			var o = {};
+			o.reg = function(id, url) {
+				imgs.push({'id': id, 'url': url});
+			};
+			o.regb = function(id, url) {
+				imgs.push({'id': id, 'url': url, 't': 'b'});
+			};
+			o.load = function() {
+				for(var i = imgs.length -1 ; i >= 0; i--) {
+					var item = imgs[i];
+					var ele = document.getElementById(item.id);
+					if (item.t) {
+						ele.style.backgroundImage = 'url(' + item.url + ')';
+					} else {
+						ele.src = item.url;
+					}
+				}
+			};
+
+			return o;
+		})();
+
+		var loadimga = (function(){
+			var imgs = []; //{item:'', url:'', t: 'b'}
+			return {
+				load: function() {
+					if (arguments) {
+						for(var i = arguments.length-1; i >= 0; i--) {
+							var item = document.getElementById(arguments[i]);
+							var url = item.dataset.imageUrl;
+							if (url) {
+								item.src = url;
+							} else {
+								url = item.dataset.backgroundUrl;
+								item.style.backgroundImage = 'url(' + url + ')';
+							}
+						}
+					}
+				}
+			}
+		})();
+
+	</script>
+</head>
+<body>
+	<!---->
+	<input type="button" value="reload" onclick="reload('/block/img')" />
+	<br />
+
+	<img data-image-url="/sleep?sleep=2000&type=gif&expires=1&last=-1&redir=0&t=1" style="height: 100px;" id="i001" />
+	<script src="/sleep?sleep=300&run=200&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	<img src="/sleep?sleep=400&type=gif&expires=1&last=-1&redir=0&<%=+new Date()%>" style="height: 100px;" />
+
+	<div style="width:100px; height: 100px; background-color: #eee;"></div>
+	<img src="../images/y1.png" />
+	<div data-background-url="/sleep?sleep=2000&type=gif&expires=1&last=-1&redir=0&t=2" style="width:100px; height: 100px;" id="div001"></div>
+
+	<script>
+		function loadimg(url) {
+			var img = document.createElement('img');
+			img.src = url;
+			img.style.height = "100px";
+			document.getElementsByTagName('body')[0].appendChild(img);
+		}
+
+		var url = "/sleep?sleep=2000&type=gif&expires=1&last=-1&redir=0&t=1";
+		var url2 = "/sleep?sleep=2000&type=gif&expires=1&last=-1&redir=0&t=2";
+		window.onload = function() {
+			//loadimg.reg("i001", url);
+			//url2 = "../images/y1.png";
+			//loadimg.regb("div001", url2);
+			loadimga.load("i001", "div001");
+			//loadimg(url);
+		};
+
+	</script>
+	<link href="/sleep?sleep=2000&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
+
+</body>
+</html>
