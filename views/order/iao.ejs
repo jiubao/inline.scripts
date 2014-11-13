@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			log.oDate("window loaded");
+		});
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+
+		function sleep(ms) {
+			log.oDate("start sleep");
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			log.oDate("we are here now!");
+		}
+
+		function asleep(ms1, ms2) {
+			log.oDate("start asleep");
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+
+		function loadScript(url, callback) {
+			var domscript = document.createElement('script');
+			domscript.src = url;
+			domscript.onloadDone = false;
+			domscript.onload = function() {
+				domscript.onloadDone = true;
+				callback();
+			};
+			domscript.onreadystatechange = function() {
+				if ("loaded" === domscript.readyState && !domscript.onloadDone) {
+					domscript.onloadDone = true;
+					callback();
+				}
+			};
+			document.getElementsByTagName('head')[0].appendChild(domscript);
+		}
+	</script>
+</head>
+<body>
+	<!---->
+	<input type="button" value="reload" onclick="reload('/order/iao')" />
+	<br />
+
+	<img src="/sleep?sleep=220&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
+	<link href="/sleep?sleep=320&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
+	<script src="/sleep?sleep=100&run=400&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	
+	<script>
+		function init() {
+			console.log('running after external script is loaded...');
+		}
+
+		loadScript('/sleep?sleep=1000&run=1000&type=js&expires=1&last=-1&redir=0&t=1',init)
+	</script>
+
+</body>
+</html>

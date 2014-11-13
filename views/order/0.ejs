@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			log.oDate("window loaded");
+		});
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+
+		function sleep(ms) {
+			log.oDate("start sleep");
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			log.oDate("we are here now!");
+		}
+
+		function asleep(ms1, ms2) {
+			log.oDate("start asleep");
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+
+	</script>
+
+<script type="text/javascript">
+if ( "undefined" == typeof(EFWS) || !EFWS ) {
+	var EFWS = {};
+}
+
+EFWS.Script = {
+	loadScript: function(url, onload) {
+		EFWS.Script.loadScriptDomElement(url, onload);
+	},
+
+	loadScripts: function(aUrls, onload) {
+		// first pass: see if any of the scripts are on a different domain
+		var nUrls = aUrls.length;
+		var bDifferent = false;
+		for ( var i = 0; i < nUrls; i++ ) {
+			if ( EFWS.Script.differentDomain(aUrls[i]) ) {
+				bDifferent = true;
+				break;
+			}
+		}
+
+		// pick the best loading function
+		var loadFunc = EFWS.Script.loadScriptXhrInjection;
+		if ( bDifferent ) {
+			if ( -1 != navigator.userAgent.indexOf('Firefox') || 
+				 -1 != navigator.userAgent.indexOf('Opera') ) {
+				loadFunc = EFWS.Script.loadScriptDomElement;
+			}
+			else {
+				loadFunc = EFWS.Script.loadScriptDocWrite;
+			}
+		}
+
+		// second pass: load the scripts
+		for ( var i = 0; i < nUrls; i++ ) {
+			loadFunc(aUrls[i], ( i+1 == nUrls ? onload : null ), true);
+		}
+	},
+
+	differentDomain: function(url) {
+		if ( 0 === url.indexOf('http://') || 0 === url.indexOf('https://') ) {
+			var mainDomain = document.location.protocol + 
+				"://" + document.location.host + "/";
+			return ( 0 !== url.indexOf(mainDomain) );
+		}
+		
+		return false;
+	},
+
+	loadScriptDomElement: function(url, onload) {
+		var domscript = document.createElement('script');
+		domscript.src = url;
+		if ( onload ) {
+			domscript.onloadDone = false;
+			domscript.onload = function() { 
+				if ( !domscript.onloadDone ) {
+					domscript.onloadDone = true; 
+					onload(); 
+				}
+			};
+			domscript.onreadystatechange = function() {
+				if ( ( "loaded" === domscript.readyState || "complete" === domscript.readyState ) && !domscript.onloadDone ) {
+					domscript.onloadDone = true;
+					onload();
+				}
+			}
+		}
+		document.getElementsByTagName('head')[0].appendChild(domscript);
+	},
+
+	loadScriptDocWrite: function(url, onload) {
+		document.write('<scr' + 'ipt src="' + url + 
+					   '" type="text/javascript"></scr' + 'ipt>');
+		if ( onload ) {
+			// we can't tie it to the script's onload, so use window
+			// thus, it doesn't fire as early as it might have
+			EFWS.addHandler(window, "load", onload);
+		}
+	},
+
+	queuedScripts: new Array(),
+
+	loadScriptXhrInjection: function(url, onload, bOrder) {
+		var iQueue = EFWS.Script.queuedScripts.length;
+		if ( bOrder ) {
+			var qScript = { response: null, onload: onload, done: false };
+			EFWS.Script.queuedScripts[iQueue] = qScript;
+		}
+
+		var xhrObj = EFWS.Script.getXHRObject();
+		xhrObj.onreadystatechange = function() { 
+			if ( xhrObj.readyState == 4 ) {
+				if ( bOrder ) {
+					EFWS.Script.queuedScripts[iQueue].response = xhrObj.responseText;
+					EFWS.Script.injectScripts();
+				}
+				else {
+					var se = document.createElement('script');
+					document.getElementsByTagName('head')[0].appendChild(se);
+					se.text = xhrObj.responseText;
+					if ( onload ) {
+						onload();
+					}
+				}
+			}
+		};
+		xhrObj.open('GET', url, true);
+		xhrObj.send('');
+	},
+
+	injectScripts: function() {
+		var len = EFWS.Script.queuedScripts.length;
+		for ( var i = 0; i < len; i++ ) {
+			var qScript = EFWS.Script.queuedScripts[i];
+			if ( ! qScript.done ) {
+				if ( ! qScript.response ) {
+					// STOP! need to wait for this response
+					break;
+				}
+				else {
+					var se = document.createElement('script');
+					document.getElementsByTagName('head')[0].appendChild(se);
+					se.text = qScript.response;
+					if ( qScript.onload ) {
+						qScript.onload();
+					}
+					qScript.done = true;
+				}
+			}
+		}
+	},
+
+	getXHRObject: function() {
+		var xhrObj = false;
+		try {
+			xhrObj = new XMLHttpRequest();
+		}
+		catch(e){
+			var aTypes = ["Msxml2.XMLHTTP.6.0", 
+						  "Msxml2.XMLHTTP.3.0", 
+						  "Msxml2.XMLHTTP", 
+						  "Microsoft.XMLHTTP"];
+			var len = aTypes.length;
+			for ( var i=0; i < len; i++ ) {
+				try {
+					xhrObj = new ActiveXObject(aTypes[i]);
+				}
+				catch(e) {
+					continue;
+				}
+				break;
+			}
+		}
+		finally {
+			return xhrObj;
+		}
+	}
+};
+
+EFWS.addHandler = function(elem, type, func) {
+	if ( elem.addEventListener ) {
+		elem.addEventListener(type, func, false);
+	}
+	else if ( elem.attachEvent ) {
+		elem.attachEvent("on" + type, func);
+	}
+};
+</script>
+</head>
+<body>
+	<!---->
+	<input type="button" value="reload" onclick="reload('/order/0')" />
+	<br />
+
+	<script src="/sleep?sleep=10&run=10&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	<img src="/sleep?sleep=220&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
+	
+	<script>
+		function init() {
+			console.log('running after external script is loaded...');
+		}
+
+		EFWS.Script.loadScripts(["/sleep?sleep=900&run=101&type=js&expires=1&last=-1&redir=0&t=1", "/sleep?sleep=200&run=102&type=js&expires=1&last=-1&redir=0&t=2", "/sleep?sleep=500&run=103&type=js&expires=1&last=-1&redir=0&t=3"], init);
+	</script>
+	
+	<link href="/sleep?sleep=320&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
+
+</body>
+</html>
+
+

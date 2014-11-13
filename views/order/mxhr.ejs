@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		var log = (function log() {
+			var dd = +new Date();
+
+			return {
+				oDate: function(str) {
+					console.log(+new Date() - dd + (str ? " : " + str : ""));
+				}
+			};
+		})();
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			log.oDate("DOM fullly loaded and parsed");
+		});
+
+		window.addEventListener("load", function(event) {
+			log.oDate("window loaded");
+		});
+
+		function reload(url) {
+			document.body.innerHTML = '';
+			document.location = url;
+		}
+
+
+		function sleep(ms) {
+			log.oDate("start sleep");
+			ms += new Date().getTime();
+			while(new Date() < ms) {}
+
+			log.oDate("we are here now!");
+		}
+
+		function asleep(ms1, ms2) {
+			log.oDate("start asleep");
+			setTimeout(function(){
+				sleep(ms1);
+			}, ms2);
+		}
+
+		function loadScript(url, callback) {
+			var domscript = document.createElement('script');
+			domscript.src = url;
+			domscript.onloadDone = false;
+			domscript.onload = function() {
+				domscript.onloadDone = true;
+				callback();
+			};
+			domscript.onreadystatechange = function() {
+				if ("loaded" === domscript.readyState && !domscript.onloadDone) {
+					domscript.onloadDone = true;
+					callback();
+				}
+			};
+			document.getElementsByTagName('head')[0].appendChild(domscript);
+		}
+
+		var XDScript = {
+			queuedScripts: new Array(),
+			loadScriptXhrInjection: function(url, onload, bOrder) {
+				var iQ = XDScript.queuedScripts.length;
+				if ( bOrder ) {
+					var qScript = {response: null, onload: onload, done: false};
+					XDScript.queuedScripts[iQ] = qScript;
+				}
+				var xhrObj = XDScript.getXHRObject();
+				xhrObj.onreadystatechange = function() {
+					if ( xhrObj.readyState == 4 ) {
+						if ( bOrder ) {
+							console.log(iQ);
+							XDScript.queuedScripts[iQ].response = xhrObj.responseText;
+							XDScript.injectScripts();
+						}
+						else {
+							eval(xhrObj.responseText);
+							if ( onload ) {
+								onload();
+							}
+						}
+					}
+				};
+
+				xhrObj.open('GET', url, true);
+				xhrObj.send('');
+			},
+
+			injectScripts: function() {
+				var len = XDScript.queuedScripts.length;
+				for ( var i = 0; i < len; i++ ) {
+					var qScript = XDScript.queuedScripts[i];
+					if ( ! qScript.done ) {
+						if ( ! qScript.response ) {
+							// STOP! need to wait for this response
+							break;
+						}
+						else {
+							eval(qScript.response);
+							if ( qScript.onload ) {
+								qScript.onload();
+							}
+							qScript.done = true;
+						}
+					}
+				}
+			},
+
+			getXHRObject: function() {
+				var xhrObj = false;
+				try {
+					xhrObj = new XMLHttpRequest();
+				}
+				catch(e){
+					var aTypes = ["Msxml2.XMLHTTP.6.0",
+					"Msxml2.XMLHTTP.3.0",
+					"Msxml2.XMLHTTP",
+					"Microsoft.XMLHTTP"];
+					var len = aTypes.length;
+					for ( var i=0; i < len; i++ ) {
+						try {
+							xhrObj = new ActiveXObject(aTypes[i]);
+						}
+						catch(e) {
+							continue;
+						}
+						break;
+					}
+				}
+				finally {
+					return xhrObj;
+				}
+			}
+
+		};
+
+	</script>
+</head>
+<body>
+	<!---->
+	<input type="button" value="reload" onclick="reload('/order/mxhr')" />
+	<br />
+
+	<img src="/sleep?sleep=220&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
+	<link href="/sleep?sleep=320&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
+	<script src="/sleep?sleep=100&run=400&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	
+	<script>
+		function init(str) {
+			console.log(str + ' is running ...');
+		}
+
+		//loadScript('/sleep?sleep=1000&run=1000&type=js&expires=1&last=-1&redir=0&t=1',init)
+		XDScript.loadScriptXhrInjection("/sleep?sleep=900&run=101&type=js&expires=1&last=-1&redir=0&t=1", function(){init('a');}, true);
+		XDScript.loadScriptXhrInjection("/sleep?sleep=200&run=102&type=js&expires=1&last=-1&redir=0&t=2", function(){init("b")}, true);
+		XDScript.loadScriptXhrInjection("/sleep?sleep=500&run=103&type=js&expires=1&last=-1&redir=0&t=3", function(){init("c")}, true);
+	</script>
+
+</body>
+</html>

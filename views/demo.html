@@ -40,6 +40,26 @@
 				sleep(ms1);
 			}, ms2);
 		}
+
+		var loadimga = (function(){
+			var imgs = []; //{item:'', url:'', t: 'b'}
+			return {
+				load: function() {
+					if (arguments) {
+						for(var i = arguments.length-1; i >= 0; i--) {
+							var item = document.getElementById(arguments[i]);
+							var url = item.dataset.imageUrl;
+							if (url) {
+								item.src = url;
+							} else {
+								url = item.dataset.backgroundUrl;
+								item.style.backgroundImage = 'url(' + url + ')';
+							}
+						}
+					}
+				}
+			}
+		})();
 	</script>
 </head>
 <body>
