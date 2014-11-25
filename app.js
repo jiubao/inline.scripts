@@ -17,6 +17,7 @@ var inlines = require('./routes/inline');
 var block = require('./routes/block');
 var order = require('./routes/order');
 var sleep = require('./routes/sleep');
+var lazy = require('./routes/lazy');
 
 
 // view engine setup
@@ -38,6 +39,7 @@ app.use('/inline', inlines);
 app.use('/block', block);
 app.use('/order', order);
 app.use('/users', users);
+app.use('/lazy', lazy);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
