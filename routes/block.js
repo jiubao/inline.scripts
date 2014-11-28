@@ -3,7 +3,14 @@ var router = express.Router();
 
 
 router.get('/0', function(req, res) {
-  res.render('block/0', { title: 'xiad' });
+  res.render('block/0', { title: 'xiad',
+  	sleep: function() {
+  		setTimeout(function() {
+  			console.log('sleepinggggg...');
+  		}, 3000);
+  	}
+
+  });
 });
 
 router.get('/1', function(req, res) {

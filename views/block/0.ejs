@@ -68,9 +68,38 @@
 	<input type="button" value="reload" onclick="reload('/block/0')" />
 	<br />
 
-	<%for(var i = 0; i<100000; i++){%>
-	<p>sksksksksksksk</p>
-	<%}%>
+	<script src="/sleep?sleep=30&run=30&type=js&expires=1&last=-1&redir=0&t=33" type="text/javascript"></script>
+
+<%
+//flush();
+/*
+console.log('starting...');
+var ms = 6000 + new Date().getTime();
+while(new Date() < ms);
+console.log('end...');
+*/
+%>
+
+<div style="height: 100px; overflow: hidden;">
+<% 
+for(var i = 0; i< 1000000; i++){
+%>
+<p>some text</p>
+<%
+}
+%>
+</div>
+
+<%
+/*
+console.log('starting...');
+var ms = 6000 + new Date().getTime();
+while(new Date() < ms);
+console.log('end...');
+*/
+%>
+
+<p>xiad</p>
 
 
 </body>

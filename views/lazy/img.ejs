@@ -60,18 +60,37 @@
 				}
 			}
 		})();
+
+		var lazyloadcssimg = (function(){
+			var o = {};
+			o.load = function() {
+				if (arguments) {
+					for (var i = arguments.length - 1; i >= 0; i--) {
+						var item = document.getElementById(arguments[i]);
+						var cname = item.dataset.zclass;
+						if (cname) {
+							item.setAttribute('class', cname);
+							item.removeAttribute('data-zclass');
+						}
+					};
+				}
+			};
+			return o;
+		})();
 	</script>
 </head>
 <body>
 	<!---->
 	<input type="button" value="reload" onclick="reload('/lazy/img')" />
+	<div id="div1" data-zclass="img1"></div>
 	<div class="img2"></div>
 	<br />
 
-	<script src="/sleep?sleep=100&run=400&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+	<script src="/sleep?sleep=100&run=200&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
 
 	<script>
-		asleep(200,100);
+		asleep(2000,700);
+		lazyloadcssimg.load("div1");
 	</script>
 	
 	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
