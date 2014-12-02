@@ -60,28 +60,47 @@
 				}
 			}
 		})();
+
+
+		var loadScriptDocWrite = function(url, onload) {
+			document.write('<scr' + 'ipt src="' + url + 
+						   '" type="text/javascript"></scr' + 'ipt>');
+			if ( onload ) {
+				// we can't tie it to the script's onload, so use window
+				// thus, it doesn't fire as early as it might have
+				EFWS.addHandler(window, "load", onload);
+			}
+		};
+
+		var addHandler = function(elem, type, func) {
+			if ( elem.addEventListener ) {
+				elem.addEventListener(type, func, false);
+			}
+			else if ( elem.attachEvent ) {
+				elem.attachEvent("on" + type, func);
+			}
+		};
 	</script>
 </head>
 <body>
 	<!---->
-	<input type="button" value="reload" onclick="reload('/inline/bottomblock')" />
+	<input type="button" value="reload" onclick="reload('/lazy/dwrite')" />
 	<br />
 
-	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
-	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
-	<script src="/sleep?sleep=1000&run=1000&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
-
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.js"></script>
-	<img src="../images/a1.jpg" />
-
 	<script>
-		sleep(1000);
-		asleep(1000,1000);
+		addHandler(window, 'DOMContentLoaded', function(){
+		var jss = ["/sleep?sleep=900&run=101&type=js&expires=1&last=-1&redir=0&t=1", "/sleep?sleep=200&run=102&type=js&expires=1&last=-1&redir=0&t=2", "/sleep?sleep=500&run=103&type=js&expires=1&last=-1&redir=0&t=3", "//code.jquery.com/jquery-1.11.1.js"];
+
+			for(var i = 0; i<jss.length; i++) {
+				loadScriptDocWrite(jss[i]);
+			}
+		});
+
 	</script>
 
 </body>
 </html>
 
 <!--
-comments comes here
+13. running document.write after window.DOMContentLoaded, page content will be overwrote (to blank)
 -->

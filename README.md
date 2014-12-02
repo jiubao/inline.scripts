@@ -28,7 +28,7 @@ even faster web sites --> inline scripts
 
 9. fifo
 
-10. lodaing priority: css > js > img
+10. loading priority: css > js > img
 
 11. js
 
@@ -39,4 +39,6 @@ even faster web sites --> inline scripts
 	but it doesn't stop downloading in parallel.
 	the parsing happens as it's being downloaded.
 	it doesn't wait until it's fully downloaded.
+
+13. running document.write after window.DOMContentLoaded, page content will be overwrote (to blank)
 	
