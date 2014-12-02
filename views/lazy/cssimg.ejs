@@ -34,11 +34,10 @@
 			log.oDate("we are here now!");
 		}
 
-		function asleep(ms1, ms2, func) {
+		function asleep(ms1, ms2) {
 			log.oDate("start asleep");
 			setTimeout(function(){
 				sleep(ms1);
-				if (func) func();
 			}, ms2);
 		}
 
@@ -78,67 +77,34 @@
 			};
 			return o;
 		})();
-
-		var loadimg = (function(){
-			var o = {};
-			o.img = function() {
-			};
-			o.css = function() {};
-			return o;
-		})();
 	</script>
 
 	<script type="text/javascript" src="/javascripts/xd.js"></script>
-	<style>
-		img {height: 300px;width:300px;display: block;}
-		img[data-img-src] {background:url(/images/loading.gif) no-repeat 50% 50%;}
-		[data-img-class] {background:url(/images/loading.gif) no-repeat 50% 50%;}
-		<% for(var i = 0; i< 10; i++){ %>
-		.img<%=i%> {background: url(/sleep?sleep=300&type=gif&expires=1&last=-1&redir=0&t=90<%=i%>);}
-		<% } %>
-	</style>
 </head>
 <body>
-
-	<input type="button" value="reload" onclick="reload('/lazy/img')" />
-	<br />
-
-
-	<% for(var i = 0; i< 20; i++){ %>
-	<img data-img-src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&t=<%=i%>"/>
-	<% } %>
-
-	<% for(var i = 0; i< 10; i++){ %>
-	<div style="width:400px;height:400px;" data-img-class="img<%=i%>"></div>
-	<% } %>
-
-
-<script type="text/javascript">
-	xd.script.loadScript("//code.jquery.com/jquery-1.11.1.js", function(){xd.jq.image.img();xd.jq.image.css();});
-</script>
-
-
-</body>
-</html>
-
-
-<!--
-
-	<img src="/sleep?sleep=1&type=gif&expires=1&last=-1&redir=0&t=101"/>
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.js"></script>
-
--->
-
-
-<!--
+	<!--
 
 1. first trigger
 2. don't load any
 3. scroll trigger
 4. img[data-src]
 
-a. issue-img become blank when data-xxx removed: remove data-xxx when img onload
-b. issue-css how to set init height/width for div: separate style to two part: 1. image url for lazy load. 2. other styles.
-c. load rest imgs when page not busy
+	-->
+	<input type="button" value="reload" onclick="reload('/lazy/cssimg')" />
+	<div id="div1" data-zclass="img1"></div>
+	<div class="img2"></div>
+	<br />
 
--->
+	<script src="/sleep?sleep=100&run=200&type=js&expires=1&last=-1&redir=0&t=<%=+new Date()%>" type="text/javascript"></script>
+
+	<script>
+		asleep(2000,700);
+		//lazyloadcssimg.load("div1");
+	</script>
+	
+	<img src="/sleep?sleep=1000&type=gif&expires=1&last=-1&redir=0&t=<%=+new Date()%>" style="height: 100px;" />
+	<link href="/sleep?sleep=1000&type=css&expires=1&last=-1&redir=0&t=<%=+new Date()%>" rel="stylesheet" />
+
+
+</body>
+</html>

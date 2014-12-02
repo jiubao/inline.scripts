@@ -5,6 +5,10 @@ router.get('/img', function(req, res) {
   res.render('lazy/img', { title: 'xiad' });
 });
 
+router.get('/cssimg', function(req, res) {
+  res.render('lazy/cssimg', { title: 'xiad' });
+});
+
 router.get('/dwrite', function(req, res) {
   res.render('lazy/dwrite', { title: 'xiad' });
 });
