@@ -1,7 +1,25 @@
 //first part code in this file should be embedded into html (script)
 
 if ( "undefined" == typeof(xd) || !xd ) {
-	var xd = {};
+	var xd = (function() {
+		o = {
+			win: window,
+			doc: document,
+			doce: document.documentElement
+			//body: xd.doc.body
+		};
+		var body = null;
+		o.getBody = function() {
+			if (body == null) {
+				body = document.body;
+			}
+			return body;
+		};
+		o.t0 = function(item) {
+			return item === 0 ? item : null;
+		};
+		return o;
+	})();
 }
 
 xd.script = (function(){
@@ -171,6 +189,50 @@ xd.addhandler = function(elem, type, func) {
 };
 
 
+xd.size = (function(){
+	var w = window,
+	    d = document,
+	    e = d.documentElement,
+	    b = d.body;
+	    //b = d.getElementsByTagName('body')[0];
+
+	var o = {
+		page: {
+			w: function() {},
+			h: function() {},
+			t: function() {
+
+				// w.pageYOffset || 0;
+				// e.scrollTop || 0;
+				// b.scrollTop || 0;
+
+				return w.pageYOffset || e.scrollTop;// || b.scrollTop;
+			},
+			l: function() {return w.pageXOffset || e.scrollLeft;}// || b.scrollLeft;}
+		},
+		win: {
+			w: function() {return w.innerWidth || e.clientWidth;},// || b.clientWidth;},
+			h: function() {return w.innerHeight || e.clientHeight;}// || b.clientHeight}
+		},
+		screen: {}
+	};
+
+	o.p = function(elem){
+		var box = {top: 0, left:0};
+		if ( typeof elem.getBoundingClientRect !== undefined ) {
+			box = elem.getBoundingClientRect();
+		}
+		return { t: box.top, l: box.left };
+	};
+
+	o.s = function(elem) {
+		return {w: elem.clientWidth, h: elem.clientHeight};
+	};
+
+	return o;
+})();
+
+
 if ( "undefined" == typeof(xd.jq) || !xd.jq ) {
 	xd.jq = {};
 }
@@ -271,17 +333,17 @@ xd.image = (function() {
 	};
 
 	function loadimg(b) {
+		var s = xd.size;
 		if (!b) {
-			var win = $(window);
-			var top = win.scrollTop();
-			var height = win.height();
+			var top = s.page.t();
+			var height = s.win.h();
 		}
 
 		$('img[data-img-src]').each(function(){
 			var ele = $(this);
 			if (!b) {
-				var etop = ele.offset().top;
-				var eh = ele.height();
+				var etop = s.p(this).t + top;
+				var eh = s.s(this).h;
 			}
 			if (b || (etop > top - eh && etop < top + height)) {
 				ele.attr('src', ele.data('img-src')).on('load', function(){
@@ -300,8 +362,6 @@ xd.image = (function() {
 		$('['+options.css+']').each(function(){
 			var ele = $(this);
 			if (!b) {
-				//var etop = ele.offset().top;
-				//var eh = ele.height();
 				var etop = this.offsetTop;
 				var sh = this.offsetHeight;
 			}

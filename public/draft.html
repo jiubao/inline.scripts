@@ -70,20 +70,47 @@ function check2() {
 <div id="foot"></div>
 </body>
 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/javascripts/xd.js"></script>
+
 <script type="text/javascript">
 var d1 = document.getElementById('d1');
 var head = document.getElementById('head');
 var body = document.getElementById('body');
 var foot = document.getElementById('foot');
 
+function g(str) {
+	console.log(str);
+}
+
 d1.onclick = function() {
 
+	size();
+	joffset();
 	rect();
 	showScrollTop();
 	showScrollHeight();
 	showClientHeight();
 	showClientTop();
 };
+
+function size() {
+	g(xd.size.win.h());
+}
+
+function joffset() {
+	var jd1 = $('#d1');
+	var jhead = $('#head');
+	var jbody = $('#body');
+	var jfoot = $('#foot');
+	g("jquery offset top:");
+	g("d1:" + jd1.offset().top);
+	g("head:" + jhead.offset().top);
+	g("body:" + jbody.offset().top);
+	g("foot:" + jfoot.offset().top);
+
+	var bt = jbody.scrollTop();
+}
 
 function rect() {
 	console.log("getBoundingClientRect top:");
