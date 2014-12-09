@@ -87,8 +87,13 @@
 			return o;
 		})();
 	</script>
-
 	<script type="text/javascript" src="/javascripts/xd.js"></script>
+	<script type="text/javascript" src="/javascripts/script.js"></script>
+<!--
+	<script type="text/javascript" src="/javascripts/image.jquery.js"></script>
+	<script type="text/javascript" src="/javascripts/size.js"></script>
+	<script type="text/javascript" src="/javascripts/image.js"></script>
+-->
 	<style>
 		img {height: 300px;width:300px;display: block;}
 		img[data-img-src] {background:url(/images/loading.gif) no-repeat 50% 50%;}
@@ -114,8 +119,10 @@
 
 
 <script type="text/javascript">
-	//xd.script.loadScript("//code.jquery.com/jquery-1.11.1.js", function(){xd.jq.image.img();xd.jq.image.css();});
-	xd.script.loadScript("//code.jquery.com/jquery-1.11.1.js", function(){xd.image.img();});
+	//xd.script.loadScript("//code.jquery.com/jquery-1.11.1.js", function(){xd.image.img();xd.image.css();});
+	//window.setTimeout(function() { xd.script.loadScripts(["/javascripts/size.js", "/javascripts/image.js"], function() {xd.image.img(); xd.image.css();}) }, 0);
+	xd.script.loadScripts(["/javascripts/size.js", "/javascripts/image.js"], function() {xd.image.img(); xd.image.css();})
+	//xd.image.img(); xd.image.css();
 </script>
 
 
