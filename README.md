@@ -17,7 +17,7 @@ events:
 
 
 effects:
-	parallel download
+	parallel downloading
 	progressive rendering
 
 
