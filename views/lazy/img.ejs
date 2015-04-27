@@ -96,12 +96,11 @@
 -->
 	<style>
 		img {height: 300px;width:300px;display: block;}
-		img[data-img-src] {background:url(/images/loading.gif) no-repeat 50% 50%;}
-		[data-img-class] {background:url(/images/loading.gif) no-repeat 50% 50%;}
 		<% for(var i = 0; i< 10; i++){ %>
 		.img<%=i%> {background: url(/sleep?sleep=300&type=gif&expires=1&last=-1&redir=0&t=90<%=i%>);}
 		<% } %>
 	</style>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/image.css"/>
 </head>
 <body>
 
