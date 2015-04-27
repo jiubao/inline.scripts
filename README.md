@@ -1,3 +1,35 @@
+==============
+points
+==============
+
+resources:
+	html
+	css
+	js
+	img
+	font
+	iframe
+
+
+events:
+	document.domcontentLoaded
+	window.onload
+
+
+effects:
+	parallel download
+	progressive rendering
+
+
+practices:
+	xd.prefix
+	(function(window, document, undefined) {
+
+	xd.suffix
+	})(window, document);
+
+
+==============
 inline.scripts
 ==============
 
