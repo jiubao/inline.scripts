@@ -12,13 +12,13 @@ resources:
 
 
 events:
-	document.domcontentLoaded
-	window.onload
+	1.document.domcontentLoaded
+	2.window.onload
 
 
 effects:
-	parallel downloading
-	progressive rendering
+	1.parallel downloading
+	2.progressive rendering
 
 
 practices:
